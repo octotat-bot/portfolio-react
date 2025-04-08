@@ -6,38 +6,18 @@ import './Projects.css';
 const projectsData = [
   {
     id: 1,
-    title: "Expense Tracker",
-    description: "A comprehensive expense tracking application with visualization and budgeting features.",
-    tags: ["Web App", "React"],
-    githubLink: "https://github.com/mukundmangla/expense-tracker",
-    demoLink: "https://expense-tracker-demo.vercel.app",
-    technologies: ["React", "Chart.js", "Firebase"],
-    features: [
-      "Real-time data synchronization",
-      "Interactive charts and graphs for expense visualization",
-      "Budget setting and notifications",
-      "Categorization of expenses",
-      "Monthly and yearly reports"
-    ],
-    colors: {
-      primary: "12, 255, 119", // Green
-      secondary: "50, 200, 100"
-    }
-  },
-  {
-    id: 2,
     title: "Task Manager ",
-    description: "A modern, intuitive task management application designed to help users organize their daily activities efficiently, with a focus on simplicity and visual appeal.",
-    tags: ["Frontend"],
-    githubLink: "https://github.com/octotat-bot/task-manager-app",
-    demoLink: "https://task-manager-app-rosy-kappa.vercel.app/",
+    description: "A robust RESTful API for task management with authentication and role-based permissions.",
+    tags: ["API", "Backend"],
+    githubLink: "https://github.com/mukundmangla/task-manager-api",
+    demoLink: "https://taskmanager-api-docs.vercel.app",
     technologies: ["React", "HTML", "CSS", "JavaScript"],
     features: [
-      "Task creation with optional descriptions and due dates",
-      "Smart filtering and sorting (by date, alphabetically, creation time)",
-      "Responsive design with animations and visual feedback",
-      "Status indicators for task priority and due dates",
-      
+      "User authentication and authorization",
+      "CRUD operations for tasks",
+      "Task assignment and delegation",
+      "Priority setting and sorting",
+      "Deadline tracking and notifications"
     ],
     colors: {
       primary: "12, 140, 255", // Blue
@@ -45,27 +25,7 @@ const projectsData = [
     }
   },
   {
-    id: 3,
-    title: "Portfolio Website",
-    description: "A personal portfolio website showcasing projects and skills with interactive elements.",
-    tags: ["Web App", "Frontend"],
-    githubLink: "https://github.com/mukundmangla/portfolio",
-    demoLink: "https://mukundmangla.dev",
-    technologies: ["React", "JavaScript", "CSS3", "HTML5"],
-    features: [
-      "Responsive design for all devices",
-      "Advanced animations and transitions",
-      "Interactive project showcase",
-      "Dark/Light mode toggle",
-      "Contact form with validation"
-    ],
-    colors: {
-      primary: "184, 12, 255", // Purple
-      secondary: "150, 50, 200"
-    }
-  },
-  {
-    id: 4,
+    id: 2,
     title: "Weather Dashboard",
     description: "A weather application with forecasts, location-based searches, and interactive maps.",
     tags: ["Web App", "API Integration"],
