@@ -408,10 +408,10 @@ setInterval(()=>console.log("Growing..."),86400000);`}</pre>
               <div className="leetcode-content">
                 <ul>
                   <li>Solved <span className="highlight">150+</span> LeetCode questions</li>
-                  <li>Completed <span className="highlight">25+</span> questions in under 3 hours</li>
-                  <li>Proficient in data structures and algorithms</li>
+                  <li>Consistent problem-solving practice</li>
+                  <li>Strong algorithmic thinking</li>
                 </ul>
-                <a href="https://leetcode.com/mukundmangla/" target="_blank" rel="noopener noreferrer" className="leetcode-profile-link">
+                <a href="https://leetcode.com/u/Hakka123/" target="_blank" rel="noopener noreferrer" className="leetcode-profile-link">
                   View My Profile <span className="leetcode-arrow">→</span>
                 </a>
               </div>

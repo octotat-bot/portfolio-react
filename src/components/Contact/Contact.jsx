@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaGithub, FaTwitter, FaPaperPlane } from 'react-icons/fa';
+import { FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaGithub, FaPaperPlane } from 'react-icons/fa';
 import './Contact.css';
 
 const HolographicInput = ({ id, name, type, label, value, onChange, placeholder, required, textarea = false }) => {
@@ -70,11 +70,9 @@ const Contact = () => {
     message: ''
   });
 
-  // Initialize canvas and 3D effect
   useEffect(() => {
     if (!contactRef.current) return;
     
-    // Handle mouse movement for 3D effect
     const handleMouseMove = (e) => {
       const { clientX, clientY } = e;
       const { width, height, left, top } = contactRef.current.getBoundingClientRect();
@@ -87,7 +85,6 @@ const Contact = () => {
     
     document.addEventListener('mousemove', handleMouseMove);
     
-    // Initialize connecting lines canvas
     if (canvasRef.current) {
       const canvas = canvasRef.current;
       const ctx = canvas.getContext('2d');
@@ -107,11 +104,9 @@ const Contact = () => {
       const animate = () => {
         ctx.clearRect(0, 0, width, height);
         
-        // Draw connecting lines
         ctx.strokeStyle = 'rgba(12, 255, 119, 0.1)';
         ctx.lineWidth = 1;
         
-        // Connection state affects lines opacity
         let opacity = 0.05;
         if (connectionState === 'connecting') {
           opacity = 0.2;
@@ -119,7 +114,6 @@ const Contact = () => {
           opacity = 0.3;
         }
         
-        // Draw grid
         for (let x = 0; x < width; x += 40) {
           ctx.beginPath();
           ctx.moveTo(x, 0);
@@ -136,17 +130,14 @@ const Contact = () => {
           ctx.stroke();
         }
         
-        // Draw nodes and connections
         for (let i = 0; i < nodePositions.length; i++) {
           const node = nodePositions[i];
           
-          // Draw node
           ctx.beginPath();
           ctx.arc(node.x, node.y, 3, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(12, 255, 119, ${opacity * 2})`;
           ctx.fill();
           
-          // Draw connections
           for (let j = i + 1; j < nodePositions.length; j++) {
             const target = nodePositions[j];
             ctx.beginPath();
@@ -162,7 +153,6 @@ const Contact = () => {
       
       animate();
       
-      // Update canvas size on window resize
       const handleResize = () => {
         width = canvas.width = window.innerWidth;
         height = canvas.height = window.innerHeight;
@@ -180,13 +170,10 @@ const Contact = () => {
     };
   }, [contactRef, connectionState]);
   
-  // Handle page load initialization
   useEffect(() => {
-    // Set initial loading state
     setIsLoading(true);
     setFormProgress(0);
     
-    // Simulate initial loading completion after a short delay
     const initialLoadTimeout = setTimeout(() => {
       setIsLoading(false);
     }, 500);
@@ -194,20 +181,16 @@ const Contact = () => {
     return () => clearTimeout(initialLoadTimeout);
   }, []);
   
-  // Handle connection sequence when component comes into view
   useEffect(() => {
-    // Clean up any existing interval
     if (progressIntervalRef.current) {
       clearInterval(progressIntervalRef.current);
     }
     
     if (isInView && !isLoading) {
-      // Start connection sequence
       setConnectionState('connecting');
       
-      // Create a more consistent and reliable progress animation
       const startTime = Date.now();
-      const duration = 3000; // 3 seconds for the full animation
+      const duration = 3000;
       
       progressIntervalRef.current = setInterval(() => {
         const elapsed = Date.now() - startTime;
@@ -218,13 +201,12 @@ const Contact = () => {
         if (progress >= 100) {
           clearInterval(progressIntervalRef.current);
           
-          // Add a small delay before showing "connected" status
           setTimeout(() => {
             setConnectionState('connected');
             setFormActive(true);
           }, 500);
         }
-      }, 50); // Update more frequently for smoother animation
+      }, 50);
       
       return () => {
         if (progressIntervalRef.current) {
@@ -242,7 +224,6 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Show sending state
     setConnectionState('transmitting');
     setFormStatus({
       submitted: true,
@@ -250,7 +231,6 @@ const Contact = () => {
       message: 'Transmitting message...'
     });
     
-    // Simulate sending
     setTimeout(() => {
       setConnectionState('connected');
       setFormStatus({
@@ -259,7 +239,6 @@ const Contact = () => {
         message: `Thanks for your message, ${formData.name}! Message transmission successful.`
       });
       
-      // Reset form after 5 seconds
       setTimeout(() => {
         setFormStatus({
           submitted: false,
@@ -386,17 +365,13 @@ const Contact = () => {
                   
                   <div className="social-links-container">
                     <div className="social-links">
-                      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-link">
+                      <a href="https://www.linkedin.com/in/mukund-mangla" target="_blank" rel="noopener noreferrer" className="social-link">
                         <div className="social-glow"></div>
                         <FaLinkedin />
                       </a>
-                      <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="social-link">
+                      <a href="https://github.com/octotat-bot" target="_blank" rel="noopener noreferrer" className="social-link">
                         <div className="social-glow"></div>
                         <FaGithub />
-                      </a>
-                      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="social-link">
-                        <div className="social-glow"></div>
-                        <FaTwitter />
                       </a>
                     </div>
                   </div>

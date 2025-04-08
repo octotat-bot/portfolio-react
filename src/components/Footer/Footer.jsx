@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { FaHeart, FaArrowUp, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import { FaHeart, FaArrowUp, FaGithub, FaLinkedin } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 import './Footer.css';
 
@@ -10,11 +10,9 @@ const Footer = () => {
   const footerRef = useRef(null);
   const currentYear = new Date().getFullYear();
   
-  // Social links data
   const socialLinks = [
-    { icon: <FaGithub />, url: 'https://github.com/mukundmangla', name: 'GitHub' },
-    { icon: <FaLinkedin />, url: 'https://linkedin.com/in/mukundmangla', name: 'LinkedIn' },
-    { icon: <FaTwitter />, url: 'https://twitter.com/mukundmangla', name: 'Twitter' }
+    { icon: <FaGithub />, url: 'https://github.com/octotat-bot', name: 'GitHub' },
+    { icon: <FaLinkedin />, url: 'https://www.linkedin.com/in/mukund-mangla', name: 'LinkedIn' }
   ];
 
   useEffect(() => {
@@ -52,7 +50,6 @@ const Footer = () => {
     });
   };
 
-  // Generate random points for the circuit paths
   const getRandomPoints = (count) => {
     return Array.from({ length: count }, () => ({
       x: Math.random() * 100,
@@ -66,7 +63,6 @@ const Footer = () => {
     getRandomPoints(4)
   ];
 
-  // Commands for terminal effect
   const commands = [
     { cmd: 'cd ~', output: 'Changed to home directory' },
     { cmd: 'ls -l', output: 'portfolio  projects  skills  contact' },
@@ -76,7 +72,6 @@ const Footer = () => {
 
   return (
     <footer className="footer" ref={footerRef}>
-      {/* Circuit background */}
       <div className="circuit-background">
         <div className="circuit-paths">
           {circuitPoints.map((points, pathIndex) => (
@@ -247,7 +242,6 @@ const Footer = () => {
         </div>
       </div>
       
-      {/* Matrix rain effect */}
       <div className="matrix-container">
         {[...Array(15)].map((_, i) => (
           <div 

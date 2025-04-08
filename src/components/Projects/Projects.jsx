@@ -9,7 +9,7 @@ const projectsData = [
     title: "Task Manager ",
     description: "A robust RESTful API for task management with authentication and role-based permissions.",
     tags: ["API", "Backend"],
-    githubLink: "https://github.com/mukundmangla/task-manager-api",
+    githubLink: "https://github.com/octotat-bot/task-manager-api",
     demoLink: "https://taskmanager-api-docs.vercel.app",
     technologies: ["React", "HTML", "CSS", "JavaScript"],
     features: [
@@ -20,7 +20,7 @@ const projectsData = [
       "Deadline tracking and notifications"
     ],
     colors: {
-      primary: "12, 140, 255", // Blue
+      primary: "12, 140, 255", 
       secondary: "50, 100, 200"
     }
   },
@@ -29,7 +29,7 @@ const projectsData = [
     title: "Weather Dashboard",
     description: "A weather application with forecasts, location-based searches, and interactive maps.",
     tags: ["Web App", "API Integration"],
-    githubLink: "https://github.com/mukundmangla/weather-dashboard",
+    githubLink: "https://github.com/octotat-bot/weather-dashboard",
     demoLink: "https://weather-dashboard-mukundmangla.vercel.app/",
     technologies: ["OpenWeatherMap API", "Javascript", "HTML", "CSS"],
     features: [
@@ -41,7 +41,7 @@ const projectsData = [
       "Temperature unit toggle between Celsius and Fahrenheit"
     ],
     colors: {
-      primary: "255, 100, 12", // Orange
+      primary: "255, 100, 12", 
       secondary: "200, 100, 50"
     }
   }
@@ -355,7 +355,7 @@ const Projects = () => {
                 </div>
                 
                 <p className="section-subtitle">
-                  <span className="comment">// Explore my coding journey through these highlighted projects</span>
+                  Explore my coding journey through these highlighted projects
                 </p>
                 
                 <div className="projects-grid">
@@ -381,7 +381,7 @@ const Projects = () => {
                     <div className="github-profile-content">
                       <p>Explore more of my projects and contributions on GitHub</p>
                       <motion.a
-                        href="https://github.com/mukundmangla"
+                        href="https://github.com/octotat-bot"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="github-profile-link"
