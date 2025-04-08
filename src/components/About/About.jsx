@@ -113,7 +113,7 @@ const About = () => {
             <div className="about-image-frame">
               <div className="image-glitch-effect">
                 <div className="profile-image">
-                  <img src="/muku.png" alt="Mukund Mangla" />
+                  <img src="/mukund.png" alt="Mukund Mangla" />
                   <div className="image-overlay"></div>
                 </div>
               </div>
