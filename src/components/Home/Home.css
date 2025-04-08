@@ -1,0 +1,759 @@
+.home {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 80px;
+  overflow: hidden;
+  background-color: var(--bg-color);
+  will-change: opacity; /* Hint to the browser for optimization */
+  contain: layout paint style; /* Improve rendering performance */
+  opacity: 0.98;
+  transition: opacity 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.home.content-loaded {
+  opacity: 1;
+}
+
+.home.hologram-active::before {
+  opacity: 0.8;
+  transform: scale(1);
+}
+
+.home.hologram-active .hologram-border,
+.home.hologram-active .hologram-overlay {
+  opacity: 1;
+}
+
+.home::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(12, 255, 119, 0.08) 0%, transparent 70%);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 1s ease, transform 1.5s ease;
+  z-index: 0;
+}
+
+/* Hologram canvas */
+.hologram-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Hologram overlay */
+.hologram-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(0deg, rgba(12, 255, 119, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(12, 255, 119, 0.05) 1px, transparent 1px);
+  background-size: 30px 30px;
+  opacity: 0;
+  transition: opacity 1s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Scanline effect */
+.hologram-scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    rgba(12, 255, 119, 0.05) 50%, 
+    transparent 100%);
+  background-size: 100% 8px;
+  z-index: 9;
+  pointer-events: none;
+  opacity: 0.5;
+  animation: scanline 8s linear infinite;
+}
+
+@keyframes scanline {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100%; }
+}
+
+/* Particles */
+.particles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.hologram-particle {
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  z-index: 3;
+  animation: float-particle linear infinite;
+  box-shadow: 0 0 6px currentColor;
+}
+
+@keyframes float-particle {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px);
+  }
+  50% {
+    transform: translateY(-30px) translateX(-10px);
+  }
+  75% {
+    transform: translateY(-10px) translateX(-20px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+/* Floating hexagons */
+.floating-hexagons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.floating-element {
+  position: absolute;
+  top: 50%;
+  right: 15%;
+  transform-style: preserve-3d;
+  pointer-events: auto;
+  transform: translateZ(0);
+}
+
+.hexagon {
+  position: relative;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  background: linear-gradient(
+    135deg,
+    var(--hexagon-color) 0%,
+    rgba(20, 20, 30, 0.8) 80%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.3);
+  cursor: pointer;
+}
+
+.hexagon::before {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  right: 1px;
+  bottom: 1px;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  background-color: rgba(10, 10, 15, 0.9);
+  z-index: -1;
+}
+
+.hexagon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+  background: linear-gradient(45deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.1), 
+    transparent
+  );
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hexagon:hover::after,
+.hexagon-hover::after {
+  opacity: 1;
+}
+
+.hexagon-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.skill-icon {
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+}
+
+.skill-name {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.skill-hexagon {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.skill-hexagon:hover,
+.hexagon-hover {
+  transform: translateZ(10px) scale(1.1);
+  box-shadow: 0 0 20px var(--hexagon-color);
+}
+
+/* Main content container */
+.home-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  padding-bottom: 2rem;
+}
+
+/* Holographic content */
+.home-content-hologram {
+  flex: 1;
+  max-width: 600px;
+  min-height: 350px;
+  position: relative;
+  padding: 2rem;
+  border-radius: 10px;
+  z-index: 5;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.hologram-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(12, 255, 119, 0.3);
+  border-radius: 10px;
+  opacity: 0;
+  transition: opacity 1s ease;
+  z-index: -1;
+  box-shadow: 0 0 15px rgba(12, 255, 119, 0.2);
+  pointer-events: none;
+}
+
+.hologram-border::before,
+.hologram-border::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: var(--primary-color);
+  opacity: 0.8;
+}
+
+.hologram-border::before {
+  top: -5px;
+  left: -5px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+
+.hologram-border::after {
+  bottom: -5px;
+  right: -5px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+}
+
+/* Hologram text effects */
+.hologram-text {
+  position: relative;
+  z-index: 1;
+}
+
+.hologram-flicker {
+  position: relative;
+  animation: text-flicker 8s linear infinite;
+  color: var(--primary-color);
+}
+
+@keyframes text-flicker {
+  0%, 100% { opacity: 1; }
+  92%, 94% { opacity: 0.8; }
+  96% { opacity: 0.5; }
+  98% { opacity: 0.9; }
+}
+
+.hologram-flicker-fast {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  animation: fast-flicker 0.15s infinite alternate;
+  opacity: 0;
+}
+
+@keyframes fast-flicker {
+  0%, 95% { opacity: 0; }
+  100% { opacity: 0.03; }
+}
+
+.greeting {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  transform: translateZ(10px);
+}
+
+.title-hologram {
+  position: relative;
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 0 10px var(--glow-color);
+  animation: title-float 4s ease-in-out infinite;
+  transform: translateZ(20px);
+}
+
+@keyframes title-float {
+  0%, 100% { transform: translateZ(20px) translateY(0); }
+  50% { transform: translateZ(20px) translateY(-5px); }
+}
+
+.name-hologram {
+  color: var(--primary-color);
+  position: relative;
+  text-shadow: 0 0 15px var(--glow-color);
+}
+
+.name-hologram::before {
+  content: '';
+  position: absolute;
+  left: -5%;
+  bottom: -5px;
+  width: 110%;
+  height: 2px;
+  background: linear-gradient(to right, 
+    transparent, 
+    var(--primary-color),
+    transparent 
+  );
+  animation: name-glow 3s ease-in-out infinite;
+}
+
+@keyframes name-glow {
+  0%, 100% { opacity: 0.5; box-shadow: 0 0 5px var(--glow-color); }
+  50% { opacity: 1; box-shadow: 0 0 15px var(--glow-color); }
+}
+
+.typewriter-container {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  margin: 1.5rem 0;
+  height: 2.5rem;
+  transform: translateZ(15px);
+}
+
+.typewriter-prefix {
+  margin-right: 0.5rem;
+}
+
+.typewriter-text {
+  color: var(--primary-color);
+  font-weight: 700;
+  text-shadow: 0 0 8px var(--glow-color);
+  position: relative;
+}
+
+.typewriter-cursor {
+  color: var(--primary-color);
+}
+
+.description-hologram {
+  font-size: 1.1rem;
+  color: var(--text-color-secondary);
+  margin-bottom: 2rem;
+  line-height: 1.7;
+  transform: translateZ(5px);
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1.5rem;
+  transform: translateZ(25px);
+}
+
+/* Hologram buttons */
+.hologram-btn {
+  position: relative;
+  overflow: visible;
+  background-color: transparent;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  color: var(--primary-color);
+  transition: all 0.3s ease;
+}
+
+.hologram-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(12, 255, 119, 0.05);
+  z-index: -1;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.hologram-btn:hover::before {
+  background-color: rgba(12, 255, 119, 0.1);
+}
+
+.btn-content {
+  position: relative;
+  z-index: 2;
+}
+
+.btn-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at center,
+    rgba(12, 255, 119, 0.5),
+    transparent 70%
+  );
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+  border-radius: 4px;
+}
+
+.hologram-btn:hover .btn-glow {
+  opacity: 0.4;
+  animation: btn-pulse 2s ease-in-out infinite;
+}
+
+@keyframes btn-pulse {
+  0%, 100% { transform: scale(0.9); opacity: 0.3; }
+  50% { transform: scale(1.1); opacity: 0.5; }
+}
+
+.btn-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
+  z-index: -1;
+  transition: all 0.3s ease;
+}
+
+.hologram-btn:hover .btn-border {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px var(--glow-color);
+}
+
+.hologram-btn:active {
+  transform: translateY(2px);
+}
+
+/* Terminal styling */
+.terminal-hologram {
+  flex: 1;
+  max-width: 500px;
+  position: relative;
+  z-index: 5;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transform: translateY(0) rotateX(0) rotateY(0);
+  transition: transform 0.3s ease;
+}
+
+.terminal-container {
+  width: 100%;
+  min-height: 350px;
+  background-color: var(--terminal-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px var(--glow-color);
+  font-family: var(--terminal-font);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.terminal-container::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, 
+    rgba(12, 255, 119, 0.3) 0%, 
+    rgba(246, 55, 236, 0.3) 50%, 
+    rgba(12, 255, 119, 0.3) 100%
+  );
+  border-radius: 10px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: rotate-gradient 8s linear infinite;
+}
+
+@keyframes rotate-gradient {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+.terminal-container:hover::before {
+  opacity: 1;
+}
+
+.terminal-header {
+  background-color: #333;
+  padding: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.terminal-buttons {
+  position: absolute;
+  left: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.terminal-button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #FF605C;
+}
+
+.terminal-button:nth-child(2) {
+  background-color: #FFBD44;
+}
+
+.terminal-button:nth-child(3) {
+  background-color: #00CA4E;
+}
+
+.terminal-title {
+  font-size: 0.9rem;
+  color: #ddd;
+}
+
+.terminal-body {
+  padding: 1rem;
+  height: 350px;
+  overflow-y: auto;
+  background-color: rgba(10, 10, 15, 0.95);
+  background-image: 
+    radial-gradient(rgba(12, 255, 119, 0.1) 1px, transparent 1px),
+    radial-gradient(rgba(246, 55, 236, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+}
+
+.terminal-command-group {
+  margin-bottom: 1rem;
+}
+
+.terminal-line {
+  margin-bottom: 0.8rem;
+  white-space: nowrap;
+}
+
+.terminal-prompt {
+  color: var(--primary-color);
+  margin-right: 0.5rem;
+}
+
+.terminal-output {
+  color: var(--text-color);
+  margin-bottom: 1.2rem;
+  margin-left: 1rem;
+  opacity: 0.8;
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 0.6rem;
+  height: 1.2rem;
+  background-color: var(--primary-color);
+  margin-left: 0.2rem;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text-color-secondary);
+  font-size: 0.9rem;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.scroll-indicator:hover {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-5px);
+}
+
+.scroll-text {
+  margin-bottom: 0.5rem;
+  position: relative;
+  text-shadow: 0 0 5px var(--glow-color);
+}
+
+.scroll-arrow {
+  width: 20px;
+  height: 20px;
+  border-right: 2px solid var(--primary-color);
+  border-bottom: 2px solid var(--primary-color);
+  transform: rotate(45deg);
+  animation: scrollDown 2s infinite;
+  box-shadow: 0 0 5px var(--glow-color);
+}
+
+@keyframes scrollDown {
+  0% {
+    transform: rotate(45deg) translate(-5px, -5px);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(45deg) translate(5px, 5px);
+    opacity: 0;
+  }
+}
+
+/* Media queries */
+@media (max-width: 992px) {
+  .home-container {
+    flex-direction: column;
+    padding-top: 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .home-content-hologram {
+    max-width: 100%;
+    text-align: center;
+    min-height: 300px;
+    margin-bottom: 2rem;
+    padding: 1rem;
+  }
+  
+  .cta-buttons {
+    justify-content: center;
+  }
+  
+  .terminal-hologram {
+    max-width: 100%;
+  }
+  
+  .terminal-container {
+    min-height: 300px;
+  }
+  
+  .terminal-body {
+    height: 300px;
+  }
+  
+  .floating-hexagons {
+    opacity: 0.5;
+  }
+  
+  .floating-element {
+    right: auto;
+    transform: translateZ(0) !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .cta-buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .typewriter-container {
+    font-size: 1.2rem;
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .typewriter-prefix {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+  
+  .title-hologram {
+    font-size: 2.5rem;
+  }
+  
+  .particles-container {
+    opacity: 0.5;
+  }
+  
+  .floating-hexagons {
+    display: none;
+  }
+} 
